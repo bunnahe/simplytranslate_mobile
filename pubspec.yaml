@@ -2,7 +2,7 @@ name: simplytranslate_mobile
 description: An alternative frontend to Google Translate
 
 publish_to: 'none'
-version: 1.4.1+1
+version: 1.4.2+1
 
 environment:
   sdk: '>=3.0.1 <4.0.0'
@@ -13,25 +13,23 @@ dependencies:
   http: ^1.1.0
   get_storage: ^2.0.3
   audioplayers: ^5.0.0
-  package_info_plus: ^4.1.0
+  package_info_plus: ^4.0.1
   url_launcher: ^6.0.12
-  flutter_localizations:
-    sdk: flutter
   intl: ^0.18.0
   path_provider: ^2.0.8
   permission_handler: ^10.2.0
   html: ^0.15.3
   google_mobile_ads: ^3.0.0
+  i18n: ^4.0.6
 
 flutter:
   uses-material-design: true
-  generate: true
   assets:
     - assets/
     - assets/ca/
     - assets/settings/
 
-flutter_intl:
-  enabled: true
-  class_name: L10n
-  
+dev_dependencies:
+  build_runner: any
+  flutter_test:
+    sdk: flutter

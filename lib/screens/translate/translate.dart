@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
-import 'package:simplytranslate_mobile/generated/l10n.dart';
 import 'package:simplytranslate_mobile/screens/translate/widgets/ads/homebanner.dart';
 import 'package:simplytranslate_mobile/screens/translate/widgets/output/definitions.dart';
 import 'package:simplytranslate_mobile/screens/translate/widgets/output/translations.dart';
@@ -102,12 +101,12 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
               ? Positioned(
                   bottom: MediaQuery.of(context).viewInsets.bottom,
                   right: intl.Bidi.detectRtlDirectionality(
-                    L10n.of(context).arabic,
+                    i18n().langs.arabic,
                   )
                       ? null
                       : 0,
                   left: intl.Bidi.detectRtlDirectionality(
-                    L10n.of(context).arabic,
+                    i18n().langs.arabic,
                   )
                       ? 0
                       : null,

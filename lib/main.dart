@@ -3,10 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:simplytranslate_mobile/generated/l10n.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:simplytranslate_mobile/screens/about/about_screen.dart';
 import 'package:simplytranslate_mobile/screens/settings/settings_screen.dart';
@@ -105,13 +103,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             return Locale(localesLangCode[i]);
         return Locale('en');
       },
-      localizationsDelegates: [
-        L10n.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: L10n.delegate.supportedLocales,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme(
@@ -322,7 +313,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                   itemBuilder: (BuildContext context) => [
                     PopupMenuItem(
                       value: 'settings',
-                      child: Text(L10n.of(context).settings),
+                      child: Text(i18n().main.settings),
                     ),
                   ],
                   onSelected: (value) {
@@ -356,16 +347,16 @@ class MainPageLocalization extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map<String, String> themeTranslation = {
-      'dark': L10n.of(context).dark,
-      'light': L10n.of(context).light,
-      'system': L10n.of(context).follow_system,
+      'dark': i18n().main.dark,
+      'light': i18n().main.light,
+      'system': i18n().main.follow_system,
     };
 
     themeValue = themeTranslation[session.read('theme') ?? 'system']!;
 
     toSelLangMap = selectLanguagesMapGetter(context);
     fromSelLangMap = selectLanguagesMapGetter(context);
-    fromSelLangMap['auto'] = L10n.of(context).autodetect;
+    fromSelLangMap['auto'] = i18n().langs.autodetect;
 
     fromLangVal = session.read('from_lang') ?? 'auto';
     toLangVal = session.read('to_lang') ?? appLocale.languageCode;
