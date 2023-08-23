@@ -25,8 +25,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
     sourceSets {
@@ -34,11 +38,11 @@ android {
     }
 
     defaultConfig {
-        applicationId 'com.simplytranslate_mobile'
+        applicationId 'com.mobile.translate.language'
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 10
-        versionName '1.4.1'
+        versionCode 1
+        versionName '1.0.0'
     }
 
 

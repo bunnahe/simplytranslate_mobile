@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:simplytranslate_mobile/generated/l10n.dart';
+import 'package:simplytranslate_mobile/screens/translate/widgets/ads/homebanner.dart';
 import 'package:simplytranslate_mobile/screens/translate/widgets/output/definitions.dart';
 import 'package:simplytranslate_mobile/screens/translate/widgets/output/translations.dart';
 import '/data.dart';
@@ -89,6 +90,8 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                   ),
                   Definitions(googleOutput),
                   Translations(googleOutput),
+                  SizedBox(height: 50,),
+                  HomeBanner()
                 ],
               ),
             ),

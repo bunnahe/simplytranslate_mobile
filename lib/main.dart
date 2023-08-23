@@ -5,6 +5,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:simplytranslate_mobile/generated/l10n.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:simplytranslate_mobile/screens/about/about_screen.dart';
@@ -14,6 +15,7 @@ import 'screens/translate/translate.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
 
   ByteData data =
       await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
@@ -304,7 +306,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         ),
       ),
       themeMode: theme == Brightness.dark ? ThemeMode.dark : ThemeMode.light,
-      title: 'SimplyTranslate Mobile',
+      title: 'Translator',
       home: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size(0, 60),
@@ -321,10 +323,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                     PopupMenuItem(
                       value: 'settings',
                       child: Text(L10n.of(context).settings),
-                    ),
-                    PopupMenuItem(
-                      value: 'about',
-                      child: Text(L10n.of(context).about),
                     ),
                   ],
                   onSelected: (value) {
@@ -343,7 +341,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
               ],
               elevation: 3,
               iconTheme: IconThemeData(),
-              title: const Text('SimplyTranslate Mobile'),
+              title: const Text('Translator'),
             ),
           ),
         ),

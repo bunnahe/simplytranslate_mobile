@@ -7,7 +7,7 @@ import 'package:simplytranslate_mobile/generated/l10n.dart';
 import '/simplytranslate.dart' as simplytranslate;
 
 const greyColor = const Color(0xff131618);
-const greenColor = const Color(0xff3fb274);
+const greenColor = const Color(0xff2196F3);
 const lightThemeGreyColor = const Color(0xffa9a9a9);
 
 late BuildContext contextOverlordData;
@@ -62,7 +62,7 @@ late Function(String) changeToTxt;
 String newText = "";
 
 Future<void> getSharedText() async {
-  const methodChannel = MethodChannel('com.simplytranslate_mobile/translate');
+  const methodChannel = MethodChannel('com.mobile.translate.language/translate');
   try {
     final answer = await methodChannel.invokeMethod('getText');
     if (answer != '') {

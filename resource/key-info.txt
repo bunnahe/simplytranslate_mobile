@@ -1,0 +1,3 @@
+key
+alias: key
+pwd: 123456
