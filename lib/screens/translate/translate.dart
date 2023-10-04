@@ -1,5 +1,5 @@
+
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart' as intl;
 import 'package:simplytranslate_mobile/screens/translate/widgets/ads/homebanner.dart';
 import 'package:simplytranslate_mobile/screens/translate/widgets/output/definitions.dart';
 import 'package:simplytranslate_mobile/screens/translate/widgets/output/translations.dart';
@@ -22,17 +22,29 @@ class GoogleTranslate extends StatefulWidget {
 var _isBefore = false;
 
 class _GoogleTranslateState extends State<GoogleTranslate> {
+
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    if (MediaQuery.of(context).orientation == Orientation.landscape)
+    if (MediaQuery
+        .of(context)
+        .orientation == Orientation.landscape)
       _isBefore = true;
-    else if (MediaQuery.of(context).orientation == Orientation.portrait &&
+    else if (MediaQuery
+        .of(context)
+        .orientation == Orientation.portrait &&
         _isBefore) {
       _scrollController.jumpTo(0);
       _isBefore = false;
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
   }
 
   @override
@@ -63,7 +75,10 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
                   space,
                   if (loading)
                     Container(
-                      width: MediaQuery.of(context).size.width - 20,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width - 20,
                       child: LinearProgressIndicator(),
                     ),
                   Definitions(googleOutput),
@@ -78,4 +93,5 @@ class _GoogleTranslateState extends State<GoogleTranslate> {
       ],
     );
   }
+
 }

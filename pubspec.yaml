@@ -5,7 +5,7 @@ publish_to: 'none'
 version: 1.4.3+1
 
 environment:
-  sdk: '>=3.0.1 <4.0.0'
+  sdk: '>=3.0.6 <4.0.0'
 
 dependencies:
   flutter:
@@ -21,6 +21,8 @@ dependencies:
   html: ^0.15.3
   google_mobile_ads: ^3.0.0
   i18n: ^4.0.6
+  rating_dialog: ^2.0.4
+  in_app_review: ^2.0.6
 
 flutter:
   uses-material-design: true

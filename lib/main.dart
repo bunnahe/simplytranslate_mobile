@@ -1,11 +1,14 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:rating_dialog/rating_dialog.dart';
 import 'package:simplytranslate_mobile/screens/about/about_screen.dart';
 import 'package:simplytranslate_mobile/screens/settings/settings_screen.dart';
 import 'data.dart';
@@ -21,7 +24,6 @@ void main(List<String> args) async {
       .setTrustedCertificatesBytes(data.buffer.asUint8List());
 
   await GetStorage.init();
-
 
   var themeSession = session.read('theme').toString();
   if (themeSession != 'null') {
@@ -344,6 +346,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
 class MainPageLocalization extends StatelessWidget {
   const MainPageLocalization({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final Map<String, String> themeTranslation = {
@@ -379,12 +382,66 @@ class _MainPageState extends State<MainPage> {
     super.initState();
   }
 
+  final InAppReview inAppReview = InAppReview.instance;
+
   @override
   Widget build(BuildContext context) {
     translateContext = context;
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: GoogleTranslate(),
+    return WillPopScope(
+      onWillPop: () {
+        if (!(session.read("isRate") ?? false)) {
+          displayDialogRating();
+        }
+        return Future.value((session.read("isRate") ?? false));
+      },
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: GoogleTranslate(),
+      ),
+    );
+  }
+
+  void displayDialogRating() {
+    final _dialog = RatingDialog(
+      initialRating: 1.0,
+      // your app's name?
+      title: Text(
+        'Translator',
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      message: Text(
+        'Your rating is important to us.\nThanks you',
+        textAlign: TextAlign.center,
+        style: const TextStyle(fontSize: 15),
+      ),
+      // your app's logo?
+      image: Image.asset("assets/ic_laucher.png",width: 100,height: 100),
+      submitButtonText: 'Submit',
+      enableComment: false,
+      starSize: 35,
+      onCancelled: () => {SystemNavigator.pop()},
+      onSubmitted: (response) async {
+        session.write("isRate", true);
+        if (response.rating < 3.0) {
+        } else {
+          inAppReview.openStoreListing(
+              appStoreId: 'com.barcodescanner.qrscanner.android.playstore');
+        }
+        Future.delayed(const Duration(milliseconds: 100), () {
+          SystemNavigator.pop();
+        });
+      },
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) => _dialog,
     );
   }
 }
